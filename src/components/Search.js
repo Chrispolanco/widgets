@@ -1,4 +1,4 @@
-import React, {useState, userEffect, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import axios from 'axios'; 
 
 const Search = () => {
@@ -19,9 +19,16 @@ const Search = () => {
             
             setResults(data.query.search);
         }; 
-        if(term){
-            search(); 
-        }
+
+        const timeoutId = setTimeout(() => {
+            if(term){
+                search(); 
+            }
+        },1000); 
+
+        return () =>{
+            clearTimeout(timeoutId); 
+        }; 
     },[term]); 
 
     const renderedResults = results.map((result) => {
