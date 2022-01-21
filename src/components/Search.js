@@ -20,15 +20,19 @@ const Search = () => {
             setResults(data.query.search);
         }; 
 
-        const timeoutId = setTimeout(() => {
-            if(term){
-                search(); 
-            }
-        },1000); 
+        if(term && !results.length){
+            search(); 
+        }else{
+            const timeoutId = setTimeout(() => {
+                if(term){
+                    search(); 
+                }
+            },1000); 
 
-        return () =>{
-            clearTimeout(timeoutId); 
-        }; 
+            return () =>{
+                clearTimeout(timeoutId); 
+            }; 
+        }
     },[term]); 
 
     const renderedResults = results.map((result) => {
@@ -72,3 +76,6 @@ const Search = () => {
 }; 
 
 export default Search; 
+
+// UI better than ADP gorgeous UI // more seamless // running as a public company // Is there anything in particular 
+// What stands out in applicants that move onto the next round? During the interview 
