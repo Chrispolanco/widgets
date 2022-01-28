@@ -5,13 +5,19 @@ const Dropdown = ({options, selected, onSelectedChange}) => {
     const ref = useRef(); 
 
     useEffect(() => {
-        document.body.addEventListener('click', (event) => {
+        const onBodyCick = (event) => {
             if(ref.current.contains(event.target)){
                 return; 
             }
             
             setOpen(false); 
-        }, {capture: true}); 
+        }; 
+
+        document.body.addEventListener('click', onBodyCick); 
+
+        return () => {
+            document.body.removeEventListener('click', onBodyCick); 
+        }; 
     }, []); 
 
     const rederedOptions = options.map((option) =>{
